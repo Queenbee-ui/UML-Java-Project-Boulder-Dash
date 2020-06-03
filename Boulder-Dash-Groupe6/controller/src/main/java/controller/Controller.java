@@ -48,7 +48,7 @@ public final class Controller implements IController {
 	}
 	
 	public String getMessageToShow() {
-		return "Welcome to BoulderBash ! Press any key to start the game.Press\n- 1 for Level 1 \n - 2 for Level 2 \n - 3 for Level 3\n - 4 for Level 4\n - 5 for Level 5\n - 6 for Level 6\n  Use Z/Q/S/D to move the character.";
+		return "Welcome to BoulderBash ! Press any key to start the game.Press\n- 1 for Level 1 \n - 2 for Level 2 \n - 3 for Level 3\n - 4 for Level 4\n - 5 for Level 5\n - 6 for Level 6\n";
 	}
 	
 	/**
