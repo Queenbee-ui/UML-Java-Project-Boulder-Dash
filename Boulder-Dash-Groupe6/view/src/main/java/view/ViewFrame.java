@@ -25,7 +25,7 @@ class ViewFrame extends JFrame implements KeyListener {
 	private IController controller;
 	/** The Constant serialVersionUID. */
 	private static final long serialVersionUID = -697358409737458175L;
-
+	
 	/**
 	 * Instantiates a new view frame.
 	 *
@@ -120,7 +120,8 @@ class ViewFrame extends JFrame implements KeyListener {
 		ViewPanel vp = new ViewPanel(this);
 		this.setTitle("Boulder Dash - Group 6    *****************************************************************************      MENU      ****************************************************************************");
 		this.setContentPane(vp);
-		this.setSize(1480,780);
+		//this.setSize(1830, 780);
+		this.setSize(1480, 780);
 		this.setLocationRelativeTo(null);
 	}
 
