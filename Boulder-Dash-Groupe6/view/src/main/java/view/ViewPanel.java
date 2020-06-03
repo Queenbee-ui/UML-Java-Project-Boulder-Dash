@@ -54,6 +54,7 @@ class ViewPanel extends JPanel implements Observer {
 		this.setViewFrame(viewFrame);
 		viewFrame.getModel().getObservable().addObserver(this);
 		viewFrame.getModel().getMap();
+
 	}
 
 	/**
@@ -106,7 +107,8 @@ class ViewPanel extends JPanel implements Observer {
 		Map map = this.viewFrame.getModel().getMap();
 		Entity[][] loadMap = null;
 		Player player = null;
-
+//		a = getWidth();
+//		b = getHeight();
 		if (map.getPlayer() != null) {
 
 			loadMap = map.getArrayMap();
@@ -115,7 +117,6 @@ class ViewPanel extends JPanel implements Observer {
 			int playerPosY = this.viewFrame.getModel().getMap().getPlayer().getPositionY();
 			Font font = new Font("Arial", Font.BOLD, 20);
 			graphics.setFont(font);
-
 			if (counter != 0 && counter != -100) {
 
 				this.focusMapOnPlayer(graphics, width, height, playerPosX, playerPosY, scale, imageSize);
@@ -187,13 +188,12 @@ class ViewPanel extends JPanel implements Observer {
 		Entity[][] loadMap = map.getArrayMap();
 		Player player = this.viewFrame.getModel().getMap().getPlayer();
 		final int timerResetValue = 200;
-
 		for (int x = 0; x < map.getWidthMap(); x++) {
 			for (int y = 0; y < map.getHeightMap(); y++) {
 				graphics.drawImage(loadMap[x][y].getSprite().getImage(), x * imageSize, y * imageSize, this);
 			}
 		}
-
+	
 		if (!player.getIsAlive()&& hasBeenNotifiedToStop == false) {
 
 			hasBeenNotifiedToStop = true;
@@ -231,12 +231,9 @@ class ViewPanel extends JPanel implements Observer {
 	public void focusMapOnPlayer(Graphics graphics, int width, int height, int playerPosX, int playerPosY, double scale, int imageSize) {
 
 		graphics.clearRect(0, 0, width, height);
-
-
-			graphics.translate((int) (-playerPosX * imageSize * scale + width / 2),
-					(int) (-playerPosY * imageSize * scale + height / 2));
-
-			((Graphics2D) graphics).scale(scale, scale);
+			graphics.translate(0,
+					(int) (-playerPosY * imageSize + 10));
+			((Graphics2D) graphics).scale(2, 2);
 	}
 
 	/**
@@ -255,32 +252,40 @@ class ViewPanel extends JPanel implements Observer {
 	public void reverseFocusOnScreenAndStats(Graphics graphics, double scale, int width, int height, int playerPosX,
 			int playerPosY, Player player, Map map, int imageSize) {
 
-		final int xStartStatsValues = width - 220;
+		final int xStartStatsValues = width + 30;
 		final int yStartStatsValues = 0;
 		final int xEndStatsValues = 240;
 		final int yEndStatsValues = 65;
-		final int xStartStatsDisplay = width - 210;
-
-		((Graphics2D) graphics).scale(1 / scale, 1 / scale);
-
-		graphics.translate((int) (+playerPosX * imageSize * scale - width / 2), (int) (+playerPosY * imageSize * scale - height / 2));
+		final int xStartStatsDisplay = width + 30;
 		graphics.setColor(Color.white);
-		graphics.fillRect(xStartStatsValues, yStartStatsValues, xEndStatsValues, yEndStatsValues);
+		graphics.fillRect(650, 0,120, 100);
+		 Font font = new Font("Courier", Font.BOLD, 8);
+		 graphics.setFont(font);
 		graphics.setColor(Color.BLUE);
-		graphics.drawString("Remaining time : " + counter, xStartStatsDisplay, 20);
-		graphics.drawString(String.valueOf("Diamond Counter : " + player.getDiamondsCounter()), xStartStatsDisplay, 40);
+		//graphics.drawString("Remaining time : " + counter, 650, 40);
+		graphics.drawString("Remaining time : " + counter, 650, 330);
+		//graphics.drawString(String.valueOf("Diamond Counter : " + player.getDiamondsCounter()), 650, 60);
+		graphics.drawString(String.valueOf("Diamond Counter : " + player.getDiamondsCounter()), 650, 350);
 		graphics.setColor(Color.RED);
-		graphics.drawString(String.valueOf("Number needed : " + map.getNumberOfDiamondsNeeded()), xStartStatsDisplay,
-				60);
+//		graphics.drawString(String.valueOf("Number needed : " + map.getNumberOfDiamondsNeeded()), 650,
+//				80);
+		
 
 		if (player.getDiamondsCounter() >= map.getNumberOfDiamondsNeeded()) {
-			graphics.clearRect(xStartStatsValues, yStartStatsValues, xEndStatsValues, yEndStatsValues);
+			graphics.clearRect(650, 0,120, 100);
 			graphics.setColor(Color.BLUE);
-			graphics.drawString("Remaining time : " + counter, xStartStatsDisplay, 20);
+			//graphics.drawString("Remaining time : " + counter, 650, 20);
+			graphics.drawString("Remaining time : " + counter, 650, 330);
 			graphics.setColor(Color.GREEN);
-			graphics.drawString(String.valueOf("Diamond Counter : " + player.getDiamondsCounter()), xStartStatsDisplay,
-					40);
-			graphics.drawString("Go to exit door!", xStartStatsDisplay, 60);
+			//graphics.drawString(String.valueOf("Diamond Counter : " + player.getDiamondsCounter()), 650,
+			//		40);
+			graphics.drawString(String.valueOf("Diamond Counter : " + player.getDiamondsCounter()), 650,
+					350);
+			//graphics.drawString("Go to exit door!", 650, 60);
+			graphics.drawString("Go to exit door!", 650, 370);
+		}else {
+			graphics.drawString(String.valueOf("Number needed : " + map.getNumberOfDiamondsNeeded()), 650,
+					370);
 		}
 
 	}
